@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
   const [product, setProduct] = useState({ NAME: "", PRICE: "", CODE: "" });
@@ -21,11 +23,13 @@ export default function Home() {
       return;
     }
 
-    const response = await fetch("http://localhost:8000/api/product?code=" + inputValue);
-    if (response.ok) {
+    try {
+      const response = await fetch(`${API_URL}/api/product?code=${inputValue}`);
+      if (!response.ok) throw new Error("データ取得失敗");
       const data = await response.json();
       setProduct(data);
-    } else {
+    } catch (error) {
+      console.error("APIエラー:", error);
       setProduct({ CODE: inputValue, NAME: "商品が見つかりません", PRICE: "-" });
     }
   };
@@ -73,21 +77,15 @@ export default function Home() {
   
     // バックエンドにデータを送信
     try {
-      const response = await fetch("http://localhost:8000/api/purchase", {
+      const response = await fetch(`${API_URL}/api/purchase`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ items: purchaseList }),
       });
-  
-      if (!response.ok) {
-        throw new Error("購入データの送信に失敗しました。");
-      }
-  
-      // 税込合計額のポップアップ表示
+
+      if (!response.ok) throw new Error("購入データの送信に失敗しました。");
       alert(`購入完了！合計金額(税込): ${taxIncludedAmount}円`);
-  
+      
       // 入力データと購入リストをリセット
       setInputValue("");
       setProduct({ NAME: "", PRICE: "", CODE: "" });
