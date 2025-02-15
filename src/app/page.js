@@ -6,10 +6,10 @@ export default function Home() {
   const [product, setProduct] = useState({ NAME: "", PRICE: "", CODE: "" });
   const [purchaseList, setPurchaseList] = useState([]);
 
-  // 数値のみ＆11桁制限
+  // 数値のみ＆13桁制限
   const handleChange = (e) => {
     const value = e.target.value.replace(/\D/g, ""); // 数値以外を削除
-    if (value.length <= 11) {
+    if (value.length <= 13) {
       setInputValue(value);
     }
   };
@@ -106,8 +106,8 @@ export default function Home() {
           type="text"
           value={inputValue}
           onChange={handleChange}
-          placeholder="商品コード11桁を入力"
-          maxLength="11"
+          placeholder="商品コード13桁を入力"
+          maxLength="13"
           style={{
             border: "2px solid black",
             padding: "10px",
