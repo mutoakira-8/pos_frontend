@@ -36,8 +36,8 @@ jobs:
           cp -r ./public ./deploy
           cp -r ./.next/static/. ./deploy/.next/static
 
-　　　# ビルド後に.next/staticが存在するか確認するステップを追加
-　　　#　.next/staticが生成されない場合は、github actionsでエラーにならないよう追加
+     # ビルド後に.next/staticが存在するか確認するステップを追加
+     # .next/staticが生成されない場合は、github actionsでエラーにならないよう追加
       - name: Verify .next/static directory
         run: |
           if [ ! -d ".next/static" ]; then
