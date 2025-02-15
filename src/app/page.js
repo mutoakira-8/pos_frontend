@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://tech0-gen8-step4-pos-app-10.azurewebsites.net/";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://tech0-gen8-step4-pos-app-10.azurewebsites.net";
 
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
