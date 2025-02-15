@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://tech0-gen8-step4-pos-app-10.azurewebsites.net/";
 
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
@@ -85,7 +85,7 @@ export default function Home() {
 
       if (!response.ok) throw new Error("購入データの送信に失敗しました。");
       alert(`購入完了！合計金額(税込): ${taxIncludedAmount}円`);
-      
+
       // 入力データと購入リストをリセット
       setInputValue("");
       setProduct({ NAME: "", PRICE: "", CODE: "" });
